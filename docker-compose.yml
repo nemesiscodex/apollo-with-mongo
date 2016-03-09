@@ -1,0 +1,12 @@
+mongo:
+  image: mongo
+micro:
+  build: .
+  volumes:
+    - ./withmongo:/code
+    - ~/.m2:/root/.m2
+  command: bash -c "mvn package && java -jar ./target/microtest-mongo.jar"
+  links:
+    - mongo
+  ports:
+    - "8080:8080"
